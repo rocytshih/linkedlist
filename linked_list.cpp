@@ -60,13 +60,14 @@ void List<Type>::creatlinkedlist(int size){
         cout<< "size error!"<<endl;
         return;
     }
-    first = new Node<Type>(0);
-    first->link = NULL;             /*第一個node的link指標給null*/
-    cout<<"Input node 1's data: ";
-    cin >> first->data;
+    // first = new Node<Type>(0);
+    // first->link = NULL;             /*第一個node的link指標給null*/
+    // cout<<"Input node 1's data: ";
+    // cin >> first->data;
     Type key_in;
-    for(int i = 0; i<size-1; i++){
-        cout<<"Input node"<<i+2<<"'s data: ";
+    first = NULL;
+    for(int i = 0; i<size; i++){
+        cout<<"Input node"<<i+1<<"'s data: ";
         cin >> key_in;
         insert(i+1, key_in);
     }
@@ -85,6 +86,9 @@ void List<Type>::insert(int num_node, Type k){
     }
     Node<Type>* insert = new Node<Type>(k);
     for(int i = 0; i <num_node-1; i++){
+        if(current->link == 0){                 /*遇到最後一個node*/
+            break;
+        }
         current = current->link;                /*scan list到指定的node number*/
     }
     insert->link = current->link;
@@ -99,13 +103,14 @@ void List<Type>::printlist(){
     }
     current = first;
     while(current){
-        cout<<"Node"<<i<<" address:"<<current<<endl;
-        cout<<"Node"<<i<<" data: "<<current->data<<endl;
-        cout<<"Node"<<i<<" link address: "<<current->link<<endl;
+        cout<<"Node-"<<i<<" address:"<<current<<endl;
+        cout<<"Node-"<<i<<" data: "<<current->data<<endl;
+        cout<<"Node-"<<i<<" link address: "<<current->link<<endl;
         cout<<endl;
         if(current->link == NULL){
             break;
         }
         current = current->link;
+        i++;
     }
 }
